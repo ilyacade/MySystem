@@ -1,0 +1,277 @@
+<div class="report-container">
+    <div class="page-header">
+        <h1>Employee Reports</h1>
+        <div class="header-actions">
+            <button class="btn-success">
+                <i class="fas fa-file-export"></i> Export
+            </button>
+            <button class="btn-primary">
+                <i class="fas fa-print"></i> Print
+            </button>
+        </div>
+    </div>
+
+    <div class="report-filters">
+        <div class="filter-group">
+            <label>Department:</label>
+            <select id="departmentFilter">
+                <option value="all">All Departments</option>
+                <option value="sales">Sales</option>
+                <option value="inventory">Inventory</option>
+                <option value="admin">Administration</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="report-tabs">
+        <div class="report-tab active" data-tab="employee-overview">Overview</div>
+        <div class="report-tab" data-tab="performance">Performance</div>
+        <div class="report-tab" data-tab="attendance">Attendance</div>
+        <div class="report-tab" data-tab="payroll">Payroll</div>
+    </div>
+
+    <!-- Employee Overview Tab -->
+    <div class="tab-content active" id="employee-overview">
+        <div class="report-grid">
+            <div class="report-card">
+                <h3>Total Employees</h3>
+                <p class="amount">48</p>
+                <span class="trend up">+2 this month</span>
+            </div>
+            <div class="report-card">
+                <h3>Active Projects</h3>
+                <p class="amount">12</p>
+                <span class="trend up">+3 vs last month</span>
+            </div>
+            <div class="report-card">
+                <h3>Avg. Performance</h3>
+                <p class="amount">92%</p>
+                <span class="trend up">+5% vs last month</span>
+            </div>
+            <div class="report-card">
+                <h3>Attendance Rate</h3>
+                <p class="amount">96.5%</p>
+                <span class="trend up">+1.2% vs last month</span>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h3 class="section-title">Department Distribution</h3>
+            <canvas id="employeeDistributionChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Performance Tab -->
+    <div class="tab-content" id="performance">
+        <div class="report-grid">
+            <div class="report-card">
+                <h3>High Performers</h3>
+                <p class="amount">18</p>
+                <span class="trend up">+3 vs last quarter</span>
+            </div>
+            <div class="report-card">
+                <h3>Average Performers</h3>
+                <p class="amount">25</p>
+                <span class="trend">Stable</span>
+            </div>
+            <div class="report-card">
+                <h3>Needs Improvement</h3>
+                <p class="amount negative">5</p>
+                <span class="trend">Under review</span>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h3 class="section-title">Performance Metrics</h3>
+            <canvas id="performanceMetricsChart"></canvas>
+        </div>
+
+        <div class="table-container">
+            <h3 class="section-title">Employee Performance Summary</h3>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Employee</th>
+                        <th>Department</th>
+                        <th>Tasks Completed</th>
+                        <th>Efficiency</th>
+                        <th>Quality Score</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>Sales</td>
+                        <td>45/48</td>
+                        <td>94%</td>
+                        <td>4.8/5.0</td>
+                        <td><span class="badge">Excellent</span></td>
+                    </tr>
+                    <tr>
+                        <td>Jane Smith</td>
+                        <td>Inventory</td>
+                        <td>42/45</td>
+                        <td>92%</td>
+                        <td>4.5/5.0</td>
+                        <td><span class="badge">Very Good</span></td>
+                    </tr>
+                    <tr>
+                        <td>Mike Johnson</td>
+                        <td>Sales</td>
+                        <td>38/45</td>
+                        <td>85%</td>
+                        <td>4.0/5.0</td>
+                        <td><span class="badge">Good</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Attendance Tab -->
+    <div class="tab-content" id="attendance">
+        <div class="report-grid">
+            <div class="report-card">
+                <h3>Present Today</h3>
+                <p class="amount">45</p>
+                <span class="trend">Out of 48</span>
+            </div>
+            <div class="report-card">
+                <h3>On Leave</h3>
+                <p class="amount">2</p>
+                <span class="trend">Approved</span>
+            </div>
+            <div class="report-card">
+                <h3>Absent</h3>
+                <p class="amount negative">1</p>
+                <span class="trend">Unplanned</span>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h3 class="section-title">Monthly Attendance Trend</h3>
+            <canvas id="attendanceTrendChart"></canvas>
+        </div>
+
+        <div class="table-container">
+            <h3 class="section-title">Attendance Log</h3>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Employee</th>
+                        <th>Department</th>
+                        <th>Check In</th>
+                        <th>Check Out</th>
+                        <th>Working Hours</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>Sales</td>
+                        <td>09:00 AM</td>
+                        <td>05:30 PM</td>
+                        <td>8.5 hrs</td>
+                        <td><span class="badge">Present</span></td>
+                    </tr>
+                    <tr>
+                        <td>Jane Smith</td>
+                        <td>Inventory</td>
+                        <td>08:45 AM</td>
+                        <td>05:15 PM</td>
+                        <td>8.5 hrs</td>
+                        <td><span class="badge">Present</span></td>
+                    </tr>
+                    <tr>
+                        <td>Mike Johnson</td>
+                        <td>Sales</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td><span class="badge pending">On Leave</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Payroll Tab -->
+    <div class="tab-content" id="payroll">
+        <div class="report-grid">
+            <div class="report-card">
+                <h3>Total Payroll</h3>
+                <p class="amount">$125,450</p>
+                <span class="trend">This Month</span>
+            </div>
+            <div class="report-card">
+                <h3>Average Salary</h3>
+                <p class="amount">$3,850</p>
+                <span class="trend up">+5% vs last year</span>
+            </div>
+            <div class="report-card">
+                <h3>Benefits Cost</h3>
+                <p class="amount">$28,500</p>
+                <span class="trend">This Month</span>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h3 class="section-title">Payroll Distribution by Department</h3>
+            <canvas id="payrollDistributionChart"></canvas>
+        </div>
+
+        <div class="table-container">
+            <h3 class="section-title">Payroll Summary</h3>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Department</th>
+                        <th>Employees</th>
+                        <th>Base Salary</th>
+                        <th>Overtime</th>
+                        <th>Benefits</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sales</td>
+                        <td>15</td>
+                        <td>$45,000</td>
+                        <td>$2,500</td>
+                        <td>$8,500</td>
+                        <td>$56,000</td>
+                    </tr>
+                    <tr>
+                        <td>Inventory</td>
+                        <td>12</td>
+                        <td>$36,000</td>
+                        <td>$1,800</td>
+                        <td>$7,200</td>
+                        <td>$45,000</td>
+                    </tr>
+                    <tr>
+                        <td>Administration</td>
+                        <td>8</td>
+                        <td>$32,000</td>
+                        <td>$800</td>
+                        <td>$6,400</td>
+                        <td>$39,200</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td><strong>35</strong></td>
+                        <td><strong>$113,000</strong></td>
+                        <td><strong>$5,100</strong></td>
+                        <td><strong>$22,100</strong></td>
+                        <td><strong>$140,200</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div> 

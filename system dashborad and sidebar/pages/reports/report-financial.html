@@ -1,0 +1,442 @@
+<div class="report-container">
+    <div class="page-header">
+        <h1>Financial Reports</h1>
+        <div class="header-actions">
+            <button class="btn-success">
+                <i class="fas fa-file-export"></i> Export
+            </button>
+            <button class="btn-primary">
+                <i class="fas fa-print"></i> Print
+            </button>
+        </div>
+    </div>
+
+    <div class="report-filters">
+        <div class="filter-group">
+            <label>Date Range:</label>
+            <select id="dateRange">
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+                <option value="year">This Year</option>
+                <option value="custom">Custom Range</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="report-tabs">
+        <div class="report-tab active" data-tab="profit-loss">Profit & Loss</div>
+        <div class="report-tab" data-tab="balance-sheet">Balance Sheet</div>
+        <div class="report-tab" data-tab="expenses">Expenses</div>
+        <div class="report-tab" data-tab="invoices">Invoices & Payments</div>
+    </div>
+
+    <div class="tab-content active" id="profit-loss">
+        <div class="report-grid">
+            <div class="report-card">
+                <h3>Total Revenue</h3>
+                <p class="amount positive">$45,250.00</p>
+                <span class="trend up">+12.5% vs last month</span>
+            </div>
+            <div class="report-card">
+                <h3>Total Expenses</h3>
+                <p class="amount negative">$32,180.00</p>
+                <span class="trend down">-5.2% vs last month</span>
+            </div>
+            <div class="report-card">
+                <h3>Net Profit</h3>
+                <p class="amount positive">$13,070.00</p>
+                <span class="trend up">+8.3% vs last month</span>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="profitLossChart"></canvas>
+        </div>
+
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>This Month</th>
+                    <th>Last Month</th>
+                    <th>Change</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-header">
+                    <td colspan="4">Revenue</td>
+                </tr>
+                <tr>
+                    <td>Sales Revenue</td>
+                    <td>$42,500.00</td>
+                    <td>$38,000.00</td>
+                    <td class="positive">+11.8%</td>
+                </tr>
+                <tr>
+                    <td>Other Income</td>
+                    <td>$2,750.00</td>
+                    <td>$2,200.00</td>
+                    <td class="positive">+25.0%</td>
+                </tr>
+                <tr class="category-header">
+                    <td colspan="4">Expenses</td>
+                </tr>
+                <tr>
+                    <td>Cost of Goods Sold</td>
+                    <td>$25,500.00</td>
+                    <td>$27,000.00</td>
+                    <td class="negative">-5.6%</td>
+                </tr>
+                <tr>
+                    <td>Operating Expenses</td>
+                    <td>$6,680.00</td>
+                    <td>$6,900.00</td>
+                    <td class="negative">-3.2%</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><strong>Net Profit</strong></td>
+                    <td><strong>$13,070.00</strong></td>
+                    <td><strong>$6,300.00</strong></td>
+                    <td class="positive"><strong>+107.5%</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="tab-content" id="balance-sheet">
+        <div class="report-grid">
+            <div class="report-card">
+                <h3>Total Assets</h3>
+                <p class="amount">$245,800.00</p>
+            </div>
+            <div class="report-card">
+                <h3>Total Liabilities</h3>
+                <p class="amount">$98,500.00</p>
+            </div>
+            <div class="report-card">
+                <h3>Net Worth</h3>
+                <p class="amount positive">$147,300.00</p>
+            </div>
+        </div>
+
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-header">
+                    <td colspan="2">Assets</td>
+                </tr>
+                <tr>
+                    <td>Cash & Bank</td>
+                    <td>$85,000.00</td>
+                </tr>
+                <tr>
+                    <td>Accounts Receivable</td>
+                    <td>$45,800.00</td>
+                </tr>
+                <tr>
+                    <td>Inventory</td>
+                    <td>$115,000.00</td>
+                </tr>
+                <tr class="category-header">
+                    <td colspan="2">Liabilities</td>
+                </tr>
+                <tr>
+                    <td>Accounts Payable</td>
+                    <td>$65,500.00</td>
+                </tr>
+                <tr>
+                    <td>Bank Loans</td>
+                    <td>$33,000.00</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><strong>Net Worth</strong></td>
+                    <td><strong>$147,300.00</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="tab-content" id="expenses">
+        <div class="report-grid">
+            <div class="report-card">
+                <h3>Total Expenses</h3>
+                <p class="amount negative">$32,180.00</p>
+                <span class="trend down">-5.2% vs last month</span>
+            </div>
+            <div class="report-card">
+                <h3>Biggest Category</h3>
+                <p>Inventory Purchase</p>
+                <p class="amount negative">$25,500.00</p>
+            </div>
+            <div class="report-card">
+                <h3>Monthly Average</h3>
+                <p class="amount">$34,250.00</p>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="expensesChart"></canvas>
+        </div>
+
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>Expense Category</th>
+                    <th>This Month</th>
+                    <th>Last Month</th>
+                    <th>Change</th>
+                    <th>YTD Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Inventory Purchase</td>
+                    <td>$25,500.00</td>
+                    <td>$27,000.00</td>
+                    <td class="negative">-5.6%</td>
+                    <td>$156,000.00</td>
+                </tr>
+                <tr>
+                    <td>Salaries & Wages</td>
+                    <td>$3,500.00</td>
+                    <td>$3,500.00</td>
+                    <td>0%</td>
+                    <td>$21,000.00</td>
+                </tr>
+                <tr>
+                    <td>Rent & Utilities</td>
+                    <td>$1,800.00</td>
+                    <td>$1,800.00</td>
+                    <td>0%</td>
+                    <td>$10,800.00</td>
+                </tr>
+                <tr>
+                    <td>Office Supplies</td>
+                    <td>$480.00</td>
+                    <td>$550.00</td>
+                    <td class="positive">-12.7%</td>
+                    <td>$3,180.00</td>
+                </tr>
+                <tr>
+                    <td>Marketing & Advertising</td>
+                    <td>$700.00</td>
+                    <td>$850.00</td>
+                    <td class="positive">-17.6%</td>
+                    <td>$4,650.00</td>
+                </tr>
+                <tr>
+                    <td>Insurance</td>
+                    <td>$450.00</td>
+                    <td>$450.00</td>
+                    <td>0%</td>
+                    <td>$2,700.00</td>
+                </tr>
+                <tr>
+                    <td>Maintenance</td>
+                    <td>$350.00</td>
+                    <td>$400.00</td>
+                    <td class="positive">-12.5%</td>
+                    <td>$2,250.00</td>
+                </tr>
+                <tr>
+                    <td>Professional Services</td>
+                    <td>$800.00</td>
+                    <td>$750.00</td>
+                    <td class="negative">+6.7%</td>
+                    <td>$4,650.00</td>
+                </tr>
+                <tr>
+                    <td>Bank Charges</td>
+                    <td>$120.00</td>
+                    <td>$135.00</td>
+                    <td class="positive">-11.1%</td>
+                    <td>$765.00</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><strong>Total Expenses</strong></td>
+                    <td><strong>$32,180.00</strong></td>
+                    <td><strong>$33,935.00</strong></td>
+                    <td class="positive"><strong>-5.2%</strong></td>
+                    <td><strong>$205,995.00</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <!-- Monthly Trend -->
+        <h3 class="section-title">Monthly Expense Trend</h3>
+        <div class="chart-container">
+            <canvas id="expensesTrendChart"></canvas>
+        </div>
+    </div>
+
+    <div class="tab-content" id="invoices">
+        <div class="report-grid">
+            <div class="report-card">
+                <h3>Total Invoices</h3>
+                <p class="amount">$58,320.00</p>
+            </div>
+            <div class="report-card">
+                <h3>Paid Invoices</h3>
+                <p class="amount positive">$45,250.00</p>
+            </div>
+            <div class="report-card">
+                <h3>Pending Invoices</h3>
+                <p class="amount negative">$13,070.00</p>
+            </div>
+        </div>
+
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>Invoice No</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>INV-001</td>
+                    <td>John Doe</td>
+                    <td>2024-03-15</td>
+                    <td>$1,500.00</td>
+                    <td><span class="badge paid">Paid</span></td>
+                </tr>
+                <tr>
+                    <td>INV-002</td>
+                    <td>Jane Smith</td>
+                    <td>2024-03-14</td>
+                    <td>$2,800.00</td>
+                    <td><span class="badge partial">Partial</span></td>
+                </tr>
+                <tr>
+                    <td>INV-003</td>
+                    <td>Bob Wilson</td>
+                    <td>2024-03-13</td>
+                    <td>$950.00</td>
+                    <td><span class="badge unpaid">Unpaid</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize tabs
+    const tabs = document.querySelectorAll('.report-tab');
+    const contents = document.querySelectorAll('.tab-content');
+
+    // Make sure first tab is active by default
+    document.querySelector('.report-tab').classList.add('active');
+    document.querySelector('.tab-content').classList.add('active');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Get target content id from data-tab attribute
+            const targetId = tab.getAttribute('data-tab');
+            
+            // Remove active class from all tabs and contents
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            
+            // Add active class to clicked tab and its content
+            tab.classList.add('active');
+            document.getElementById(targetId).classList.add('active');
+
+            // If expenses tab is selected, reinitialize the expenses chart
+            if (targetId === 'expenses') {
+                initializeExpensesChart();
+            }
+        });
+    });
+
+    // Function to initialize profit/loss chart
+    function initializeProfitLossChart() {
+        const ctx = document.getElementById('profitLossChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Revenue',
+                    data: [30000, 35000, 32000, 38000, 42500, 45250],
+                    borderColor: '#10B981',
+                    tension: 0.4
+                }, {
+                    label: 'Expenses',
+                    data: [25000, 28000, 26000, 29000, 33800, 32180],
+                    borderColor: '#EF4444',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: value => '$' + value.toLocaleString()
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Function to initialize expenses chart
+    function initializeExpensesChart() {
+        const expCtx = document.getElementById('expensesChart').getContext('2d');
+        new Chart(expCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Inventory', 'Salaries', 'Rent', 'Utilities', 'Marketing'],
+                datasets: [{
+                    data: [25500, 3500, 1800, 680, 700],
+                    backgroundColor: [
+                        '#3B82F6',
+                        '#10B981',
+                        '#F59E0B',
+                        '#6366F1',
+                        '#EC4899'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    }
+                }
+            }
+        });
+    }
+
+    // Initialize charts
+    initializeProfitLossChart();
+    // Initialize expenses chart only if expenses tab is active
+    if (document.querySelector('[data-tab="expenses"]').classList.contains('active')) {
+        initializeExpensesChart();
+    }
+});
+</script> 

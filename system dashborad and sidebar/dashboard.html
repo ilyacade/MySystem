@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="css/sales.css">
+    <link rel="stylesheet" href="css/reports.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-container">
+            <i class="fas fa-building"></i>
+            <h2>Business Name</h2>
+        </div>
+        
+        <div class="menu-content">
+            <div class="menu-item" data-submenu="dashboard">
+                <span><i class="fas fa-th-large"></i> Dashboard</span>
+            </div>
+
+            <div class="menu-item" data-submenu="parties">
+                <span><i class="fas fa-users"></i> Parties</span>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="submenu" id="parties">
+                <a href="#customer"><i class="fas fa-user"></i> Customer</a>
+                <a href="#supplier"><i class="fas fa-user-tie"></i> Supplier</a>
+            </div>
+
+            <div class="menu-item" data-submenu="products">
+                <span><i class="fas fa-box"></i> Product Manager</span>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="submenu" id="products">
+                <a href="#product"><i class="fas fa-tag"></i> Brands</a>
+                <a href="#categories"><i class="fas fa-list"></i> Categories</a>
+                <a href="#products"><i class="fas fa-boxes"></i> Products</a>
+            </div>
+
+            <div class="menu-item" data-submenu="sales">
+                <span><i class="fas fa-shopping-cart"></i> Sales</span>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="submenu" id="sales">
+                <a href="#sales-list"><i class="fas fa-list"></i> Sales List</a>
+                <a href="#sales-return"><i class="fas fa-undo"></i> Sales Return</a>
+                <a href="#payment-in"><i class="fas fa-money-bill"></i> Payment In</a>
+                <a href="#sales-estimate"><i class="fas fa-file-invoice"></i> Estimation</a>
+            </div>
+
+            <div class="menu-item" data-submenu="purchases">
+                <span><i class="fas fa-shopping-basket"></i> Purchases</span>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="submenu" id="purchases">
+                <a href="#"><i class="fas fa-list"></i> Purchases</a>
+                <a href="#"><i class="fas fa-undo"></i> Purchase Return</a>
+                <a href="#"><i class="fas fa-money-bill-wave"></i> Payment Out</a>
+            </div>
+
+            <div class="menu-item" data-submenu="stock">
+                <span><i class="fas fa-warehouse"></i> Stock</span>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="submenu" id="stock">
+                <a href="#"><i class="fas fa-exchange-alt"></i> Stock Transfer</a>
+                <a href="#"><i class="fas fa-balance-scale"></i> Stock Adjustment</a>
+            </div>
+
+            <div class="menu-item" data-submenu="expenses">
+                <span><i class="fas fa-file-invoice-dollar"></i> Expenses</span>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="submenu" id="expenses">
+                <a href="#"><i class="fas fa-tags"></i> Expense category</a>
+                <a href="#"><i class="fas fa-file-invoice"></i> Expense</a>
+            </div>
+
+            <div class="menu-item" data-submenu="cashbank">
+                <span><i class="fas fa-university"></i> Cash and Bank</span>
+            </div>
+
+            <div class="menu-item" data-submenu="employees">
+                <span><i class="fas fa-user-tie"></i> Employees</span>
+            </div>
+
+            <div class="menu-item" data-submenu="reports">
+                <span><i class="fas fa-chart-line"></i> Reports</span>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="submenu" id="reports">
+                <a href="#report-dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="#report-sales"><i class="fas fa-shopping-cart"></i> Sales</a>
+                <a href="#report-inventory"><i class="fas fa-warehouse"></i> Inventory</a>
+                <a href="#report-financial"><i class="fas fa-file-invoice-dollar"></i> Financial</a>
+                <a href="#report-expense"><i class="fas fa-receipt"></i> Expenses</a>
+                <a href="#report-profit-loss"><i class="fas fa-chart-line"></i> Profit & Loss</a>
+                <a href="#report-balance"><i class="fas fa-balance-scale"></i> Balance Sheet</a>
+                <a href="#report-customer"><i class="fas fa-users"></i> Customer</a>
+                <a href="#report-vendor"><i class="fas fa-truck"></i> Vendor Balance</a>
+                <a href="#report-invoice"><i class="fas fa-file-invoice"></i> Invoice & Payment</a>
+                <a href="#report-employee"><i class="fas fa-user-tie"></i> Employee</a>
+                <a href="#report-audit"><i class="fas fa-history"></i> Audit Logs</a>
+            </div>
+        </div>
+
+        <button id="logout" onclick="handleLogout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </button>
+    </div>
+
+    <div id="mainContent">
+        <!-- Dashboard content will be loaded here -->
+    </div>
+
+    <script>
+        function handleLogout() {
+            window.location.href = 'index.html';
+        }
+
+        async function loadContent(page) {
+            // Show loading indicator
+            document.getElementById('mainContent').innerHTML = '<div class="loading"></div>';
+            
+            try {
+                let url;
+                switch(page) {
+                    case 'dashboard':
+                        url = 'pages/dashboard-content.html';
+                        break;
+                    case 'product':
+                        url = 'pages/product.html';
+                        break;
+                    case 'categories':
+                        url = 'pages/categories.html';
+                        break;
+                    case 'products':
+                        url = 'pages/products.html';
+                        break;
+                    case 'sales-list':
+                        url = 'pages/sales-list.html';
+                        break;
+                    case 'sales-return':
+                        url = 'pages/sales-return.html';
+                        break;
+                    case 'payment-in':
+                        url = 'pages/payment-in.html';
+                        break;
+                    case 'customer':
+                        url = 'pages/customer.html';
+                        break;
+                    case 'supplier':
+                        url = 'pages/supplier.html';
+                        break;
+                    case 'report-dashboard':
+                        url = 'pages/reports/report-dashboard.html';
+                        break;
+                    case 'report-financial':
+                        url = 'pages/reports/report-financial.html';
+                        break;
+                    case 'report-sales':
+                        url = 'pages/reports/report-sales.html';
+                        break;
+                    case 'report-inventory':
+                        url = 'pages/reports/report-inventory.html';
+                        break;
+                    case 'report-customer':
+                        url = 'pages/reports/report-customer.html';
+                        break;
+                    case 'report-employee':
+                        url = 'pages/reports/report-employee.html';
+                        break;
+                    case 'report-audit':
+                        url = 'pages/reports/report-audit.html';
+                        break;
+                    case 'report-expense':
+                        url = 'pages/reports/report-expense.html';
+                        break;
+                    case 'report-profit-loss':
+                        url = 'pages/reports/report-profit-loss.html';
+                        break;
+                    case 'report-balance':
+                        url = 'pages/reports/report-balance.html';
+                        break;
+                    case 'report-vendor':
+                        url = 'pages/reports/report-vendor.html';
+                        break;
+                    case 'report-invoice':
+                        url = 'pages/reports/report-invoice.html';
+                        break;
+                    default:
+                        url = `pages/${page}.html`;
+                }
+                
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Page not found: ${url}`);
+                }
+                const content = await response.text();
+                document.getElementById('mainContent').innerHTML = content;
+                
+                // Initialize dialogs after content is loaded
+                initializeDialogs();
+                
+                // Initialize report tabs if this is a report page
+                if (page.startsWith('report-')) {
+                    initializeReportTabs();
+                }
+                
+                // Initialize specific report charts based on the page
+                switch(page) {
+                    case 'report-dashboard':
+                        initializeDashboardCharts();
+                        break;
+                    case 'report-sales':
+                        initializeSalesCharts();
+                        break;
+                    case 'report-inventory':
+                        initializeInventoryCharts();
+                        break;
+                    case 'report-financial':
+                        initializeFinancialCharts();
+                        break;
+                    case 'report-expense':
+                        initializeExpenseCharts();
+                        break;
+                    case 'report-profit-loss':
+                        initializeProfitLossCharts();
+                        break;
+                    case 'report-balance':
+                        initializeBalanceSheetCharts();
+                        break;
+                    case 'report-customer':
+                        initializeCustomerReportCharts();
+                        break;
+                    case 'report-vendor':
+                        initializeVendorCharts();
+                        break;
+                    case 'report-invoice':
+                        initializeInvoiceCharts();
+                        break;
+                    case 'report-employee':
+                        initializeEmployeeReportCharts();
+                        break;
+                    case 'report-audit':
+                        initializeAuditCharts();
+                        break;
+                }
+                
+                // Update active menu item
+                updateActiveMenuItem(page);
+                
+                // Initialize main dashboard charts
+                if (page === 'dashboard') {
+                    initializeMainDashboardCharts();
+                }
+                
+            } catch (error) {
+                console.error('Error loading page:', error);
+                document.getElementById('mainContent').innerHTML = `
+                    <div class="error-message">
+                        <h2>Error Loading Content</h2>
+                        <p>${error.message}</p>
+                        <button onclick="loadContent('${page}')" class="btn-primary">
+                            <i class="fas fa-redo"></i> Retry
+                        </button>
+                    </div>`;
+            }
+        }
+
+        // Add this function to initialize dialogs
+        function initializeDialogs() {
+            // Brand dialog
+            const brandDialog = document.getElementById('addBrandDialog');
+            if (brandDialog) {
+                window.openAddBrandDialog = function() {
+                    brandDialog.classList.add('active');
+                };
+                window.closeAddBrandDialog = function() {
+                    brandDialog.classList.remove('active');
+                };
+                window.handleAddBrand = function(event) {
+                    event.preventDefault();
+                    const formData = new FormData(event.target);
+                    closeAddBrandDialog();
+                };
+                brandDialog.addEventListener('click', function(e) {
+                    if (e.target === this) closeAddBrandDialog();
+                });
+            }
+
+            // Category dialog
+            const categoryDialog = document.getElementById('addCategoryDialog');
+            if (categoryDialog) {
+                window.openAddCategoryDialog = function() {
+                    categoryDialog.classList.add('active');
+                };
+                window.closeAddCategoryDialog = function() {
+                    categoryDialog.classList.remove('active');
+                };
+                window.handleAddCategory = function(event) {
+                    event.preventDefault();
+                    const formData = new FormData(event.target);
+                    closeAddCategoryDialog();
+                };
+                categoryDialog.addEventListener('click', function(e) {
+                    if (e.target === this) closeAddCategoryDialog();
+                });
+            }
+
+            // Product dialog
+            const productDialog = document.getElementById('addProductDialog');
+            if (productDialog) {
+                window.openAddProductDialog = function() {
+                    productDialog.classList.add('active');
+                };
+                window.closeAddProductDialog = function() {
+                    productDialog.classList.remove('active');
+                };
+                window.handleAddProduct = function(event) {
+                    event.preventDefault();
+                    const formData = new FormData(event.target);
+                    closeAddProductDialog();
+                };
+                productDialog.addEventListener('click', function(e) {
+                    if (e.target === this) closeAddProductDialog();
+                });
+            }
+
+            // Return dialog
+            const returnDialog = document.getElementById('addReturnDialog');
+            if (returnDialog) {
+                window.openAddReturnDialog = function() {
+                    returnDialog.classList.add('active');
+                };
+                window.closeAddReturnDialog = function() {
+                    returnDialog.classList.remove('active');
+                };
+                window.handleAddReturn = function(event) {
+                    event.preventDefault();
+                    const formData = new FormData(event.target);
+                    closeAddReturnDialog();
+                };
+                returnDialog.addEventListener('click', function(e) {
+                    if (e.target === this) closeAddReturnDialog();
+                });
+            }
+
+            // Payment dialog
+            const paymentDialog = document.getElementById('addPaymentDialog');
+            if (paymentDialog) {
+                window.openAddPaymentDialog = function() {
+                    paymentDialog.classList.add('active');
+                };
+                window.closeAddPaymentDialog = function() {
+                    paymentDialog.classList.remove('active');
+                };
+                window.handleAddPayment = function(event) {
+                    event.preventDefault();
+                    const formData = new FormData(event.target);
+                    closeAddPaymentDialog();
+                };
+                paymentDialog.addEventListener('click', function(e) {
+                    if (e.target === this) closeAddPaymentDialog();
+                });
+            }
+
+            // Sales dialog
+            const saleDialog = document.getElementById('addSaleDialog');
+            if (saleDialog) {
+                window.openAddSaleDialog = function() {
+                    saleDialog.classList.add('active');
+                };
+                window.closeAddSaleDialog = function() {
+                    saleDialog.classList.remove('active');
+                };
+                window.handleAddSale = function(event) {
+                    event.preventDefault();
+                    const formData = new FormData(event.target);
+                    closeAddSaleDialog();
+                };
+                saleDialog.addEventListener('click', function(e) {
+                    if (e.target === this) closeAddSaleDialog();
+                });
+
+                // Add product row functionality
+                const addRowButton = document.querySelector('.add-row');
+                const productRows = document.querySelector('.product-rows');
+                if (addRowButton && productRows) {
+                    addRowButton.addEventListener('click', function() {
+                        const newRow = document.createElement('div');
+                        newRow.className = 'product-row';
+                        newRow.innerHTML = `
+                            <select class="product-select">
+                                <option value="">Select Product</option>
+                                <option value="1">Product 1</option>
+                                <option value="2">Product 2</option>
+                            </select>
+                            <input type="number" placeholder="Quantity" min="1">
+                            <input type="number" placeholder="Price" readonly>
+                            <input type="number" placeholder="Total" readonly>
+                            <button type="button" class="remove-row"><i class="fas fa-times"></i></button>
+                        `;
+                        productRows.appendChild(newRow);
+
+                        // Add remove row functionality
+                        const removeButton = newRow.querySelector('.remove-row');
+                        removeButton.addEventListener('click', function() {
+                            newRow.remove();
+                        });
+                    });
+
+                    // Add remove functionality to existing rows
+                    document.querySelectorAll('.remove-row').forEach(button => {
+                        button.addEventListener('click', function() {
+                            this.closest('.product-row').remove();
+                        });
+                    });
+                }
+            }
+
+            // Add to initializeDialogs function
+            window.toggleActionMenu = function(button) {
+                // Close all other open menus
+                document.querySelectorAll('.action-menu.active').forEach(menu => {
+                    if (menu !== button.nextElementSibling) {
+                        menu.classList.remove('active');
+                    }
+                });
+                
+                // Toggle this menu
+                const menu = button.nextElementSibling;
+                menu.classList.toggle('active');
+            };
+
+            // Close action menus when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.action-dropdown')) {
+                    document.querySelectorAll('.action-menu.active').forEach(menu => {
+                        menu.classList.remove('active');
+                    });
+                }
+            });
+
+            // Customer dialog
+            const customerDialog = document.getElementById('addCustomerDialog');
+            if (customerDialog) {
+                window.openAddCustomerDialog = function() {
+                    customerDialog.classList.add('active');
+                };
+                window.closeAddCustomerDialog = function() {
+                    customerDialog.classList.remove('active');
+                };
+                window.handleAddCustomer = function(event) {
+                    event.preventDefault();
+                    const formData = new FormData(event.target);
+                    closeAddCustomerDialog();
+                };
+                customerDialog.addEventListener('click', function(e) {
+                    if (e.target === this) closeAddCustomerDialog();
+                });
+            }
+        }
+
+        // Add this function to handle active menu states
+        function updateActiveMenuItem(page) {
+            // Remove active class from all items
+            document.querySelectorAll('.menu-item, .submenu a').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Find and activate the correct menu item
+            const menuItem = document.querySelector(`[href="#${page}"]`);
+            if (menuItem) {
+                menuItem.classList.add('active');
+                
+                // If it's in a submenu, activate parent menu
+                const parentSubmenu = menuItem.closest('.submenu');
+                if (parentSubmenu) {
+                    parentSubmenu.classList.add('active');
+                    const parentMenuItem = document.querySelector(`[data-submenu="${parentSubmenu.id}"]`);
+                    if (parentMenuItem) {
+                        parentMenuItem.classList.add('active');
+                        const icon = parentMenuItem.querySelector('.fa-chevron-right');
+                        if (icon) icon.style.transform = 'rotate(90deg)';
+                    }
+                }
+            }
+        }
+
+        // Add this function to initialize report tabs
+        function initializeReportTabs() {
+            const tabs = document.querySelectorAll('.report-tab');
+            const contents = document.querySelectorAll('.tab-content');
+
+            if (!tabs.length) return; // Exit if no tabs found
+
+            // Make first tab active by default if no active tab
+            if (!document.querySelector('.report-tab.active')) {
+                tabs[0].classList.add('active');
+                contents[0].classList.add('active');
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetId = tab.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and its content
+                    tab.classList.add('active');
+                    const targetContent = document.getElementById(targetId);
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                    }
+
+                    // Initialize specific charts based on the active tab
+                    if (targetId === 'expenses') {
+                        initializeExpensesChart();
+                    } else if (targetId === 'sales-by-product') {
+                        initializeProductSalesChart();
+                    } else if (targetId === 'sales-by-category') {
+                        initializeCategorySalesChart();
+                    }
+                });
+            });
+        }
+
+        // Add chart initialization functions
+        function initializeProfitLossChart() {
+            const ctx = document.getElementById('profitLossChart')?.getContext('2d');
+            if (!ctx) return;
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Revenue',
+                        data: [30000, 35000, 32000, 38000, 42500, 45250],
+                        borderColor: '#10B981',
+                        tension: 0.4
+                    }, {
+                        label: 'Expenses',
+                        data: [25000, 28000, 26000, 29000, 33800, 32180],
+                        borderColor: '#EF4444',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: value => '$' + value.toLocaleString()
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initializeExpensesChart() {
+            const expCtx = document.getElementById('expensesChart')?.getContext('2d');
+            if (!expCtx) return;
+
+            new Chart(expCtx, {
+                type: 'pie',
+                data: {
+                    labels: [
+                        'Inventory Purchase',
+                        'Salaries & Wages',
+                        'Rent & Utilities',
+                        'Office Supplies',
+                        'Marketing',
+                        'Insurance',
+                        'Maintenance',
+                        'Professional Services',
+                        'Bank Charges'
+                    ],
+                    datasets: [{
+                        data: [25500, 3500, 1800, 480, 700, 450, 350, 800, 120],
+                        backgroundColor: [
+                            '#3B82F6',
+                            '#10B981',
+                            '#F59E0B',
+                            '#6366F1',
+                            '#EC4899',
+                            '#8B5CF6',
+                            '#14B8A6',
+                            '#F97316',
+                            '#64748B'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                boxWidth: 12
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Add monthly trend chart
+            const trendCtx = document.getElementById('expensesTrendChart')?.getContext('2d');
+            if (trendCtx) {
+                new Chart(trendCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Monthly Expenses',
+                            data: [31000, 33500, 32800, 34200, 33935, 32180],
+                            borderColor: '#EF4444',
+                            tension: 0.4,
+                            fill: true,
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: value => '$' + value.toLocaleString()
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Add these functions after your existing chart functions
+        function initializeDashboardCharts() {
+            // Sales Overview Chart
+            const salesCtx = document.getElementById('salesOverviewChart')?.getContext('2d');
+            if (salesCtx) {
+                new Chart(salesCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Sales',
+                            data: [65000, 72000, 78000, 82000, 85000, 89000],
+                            borderColor: '#3B82F6',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: value => '$' + value.toLocaleString()
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Revenue Distribution Chart
+            const revenueCtx = document.getElementById('revenueDistributionChart')?.getContext('2d');
+            if (revenueCtx) {
+                new Chart(revenueCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Products', 'Services', 'Other'],
+                        datasets: [{
+                            data: [65, 25, 10],
+                            backgroundColor: ['#10B981', '#3B82F6', '#F59E0B']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right'
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Top Products Chart
+            const productsCtx = document.getElementById('topProductsChart')?.getContext('2d');
+            if (productsCtx) {
+                new Chart(productsCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Product A', 'Product B', 'Product C', 'Product D', 'Product E'],
+                        datasets: [{
+                            label: 'Sales',
+                            data: [12500, 11200, 9800, 8900, 7500],
+                            backgroundColor: '#3B82F6'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: value => '$' + value.toLocaleString()
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Customer Growth Chart
+            const customerCtx = document.getElementById('customerGrowthChart')?.getContext('2d');
+            if (customerCtx) {
+                new Chart(customerCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'New Customers',
+                            data: [45, 52, 58, 60, 65, 70],
+                            borderColor: '#10B981',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Inventory Status Chart
+            const inventoryCtx = document.getElementById('inventoryStatusChart')?.getContext('2d');
+            if (inventoryCtx) {
+                new Chart(inventoryCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Category A', 'Category B', 'Category C', 'Category D'],
+                        datasets: [{
+                            label: 'Stock Level',
+                            data: [85, 65, 45, 75],
+                            backgroundColor: '#F59E0B'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: {
+                                    callback: value => value + '%'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function initializeInventoryCharts() {
+            // Stock Level Chart
+            const stockCtx = document.getElementById('stockLevelChart')?.getContext('2d');
+            if (stockCtx) {
+                new Chart(stockCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Electronics', 'Clothing', 'Food & Beverage'],
+                        datasets: [{
+                            label: 'Current Stock',
+                            data: [150, 300, 200],
+                            backgroundColor: '#3B82F6'
+                        }, {
+                            label: 'Reorder Point',
+                            data: [100, 250, 150],
+                            backgroundColor: '#EF4444'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Inventory Movement Chart
+            const movementCtx = document.getElementById('inventoryMovementChart')?.getContext('2d');
+            if (movementCtx) {
+                new Chart(movementCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Stock In',
+                            data: [500, 450, 400, 600, 550, 480],
+                            borderColor: '#10B981',
+                            tension: 0.4
+                        }, {
+                            label: 'Stock Out',
+                            data: [400, 420, 380, 500, 480, 430],
+                            borderColor: '#EF4444',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Add this function for sales charts
+        function initializeSalesCharts() {
+            // Sales Trend Chart
+            const salesCtx = document.getElementById('salesTrendChart')?.getContext('2d');
+            if (salesCtx) {
+                new Chart(salesCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Sales',
+                            data: [30000, 35000, 32000, 38000, 42500, 45250],
+                            borderColor: '#10B981',
+                            tension: 0.4,
+                            fill: true,
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: value => '$' + value.toLocaleString()
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Add these helper functions for sales report charts
+        function initializeProductSalesChart() {
+            const ctx = document.getElementById('topProductsChart')?.getContext('2d');
+            if (ctx) {
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Product A', 'Product B', 'Product C', 'Product D', 'Product E'],
+                        datasets: [{
+                            label: 'Revenue',
+                            data: [12500, 9800, 7600, 6900, 5400],
+                            backgroundColor: '#3B82F6'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: value => '$' + value.toLocaleString()
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function initializeCategorySalesChart() {
+            const ctx = document.getElementById('categorySalesChart')?.getContext('2d');
+            if (ctx) {
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Electronics', 'Clothing', 'Food & Beverage'],
+                        datasets: [{
+                            data: [45, 30, 25],
+                            backgroundColor: ['#3B82F6', '#10B981', '#F59E0B']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right'
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Add these functions after your existing chart functions
+        function initializeCustomerReportCharts() {
+            // Customer Growth Chart
+            const growthCtx = document.getElementById('customerGrowthChart')?.getContext('2d');
+            if (growthCtx) {
+                new Chart(growthCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'New Customers',
+                            data: [15, 18, 22, 24, 28, 32],
+                            borderColor: '#10B981',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+
+            // Payment Methods Chart
+            const paymentCtx = document.getElementById('paymentMethodsChart')?.getContext('2d');
+            if (paymentCtx) {
+                new Chart(paymentCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Credit Card', 'PayPal', 'Bank Transfer', 'Cash'],
+                        datasets: [{
+                            data: [45, 25, 20, 10],
+                            backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+
+            // Customer Segment Chart
+            const segmentCtx = document.getElementById('customerSegmentChart')?.getContext('2d');
+            if (segmentCtx) {
+                new Chart(segmentCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['VIP', 'Regular', 'Occasional'],
+                        datasets: [{
+                            data: [25, 55, 20],
+                            backgroundColor: ['#3B82F6', '#10B981', '#F59E0B']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        function initializeEmployeeReportCharts() {
+            // Department Distribution Chart
+            const distributionCtx = document.getElementById('employeeDistributionChart')?.getContext('2d');
+            if (distributionCtx) {
+                new Chart(distributionCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Sales', 'Inventory', 'Administration'],
+                        datasets: [{
+                            data: [15, 12, 8],
+                            backgroundColor: ['#3B82F6', '#10B981', '#F59E0B']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+
+            // Performance Metrics Chart
+            const performanceCtx = document.getElementById('performanceMetricsChart')?.getContext('2d');
+            if (performanceCtx) {
+                new Chart(performanceCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Tasks Completed', 'Efficiency', 'Quality Score'],
+                        datasets: [{
+                            label: 'Average Score',
+                            data: [92, 88, 95],
+                            backgroundColor: '#3B82F6'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Attendance Trend Chart
+            const attendanceCtx = document.getElementById('attendanceTrendChart')?.getContext('2d');
+            if (attendanceCtx) {
+                new Chart(attendanceCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+                        datasets: [{
+                            label: 'Present',
+                            data: [45, 46, 44, 45, 43],
+                            borderColor: '#10B981',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+
+            // Payroll Distribution Chart
+            const payrollCtx = document.getElementById('payrollDistributionChart')?.getContext('2d');
+            if (payrollCtx) {
+                new Chart(payrollCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Sales', 'Inventory', 'Administration'],
+                        datasets: [{
+                            label: 'Total Payroll',
+                            data: [56000, 45000, 39200],
+                            backgroundColor: '#3B82F6'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: value => '$' + value.toLocaleString()
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function initializeAuditCharts() {
+            // Activity Timeline Chart
+            const auditCtx = document.getElementById('auditActivityChart')?.getContext('2d');
+            if (auditCtx) {
+                new Chart(auditCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        datasets: [{
+                            label: 'Activities',
+                            data: [120, 150, 180, 145, 160, 95, 85],
+                            borderColor: '#3B82F6',
+                            tension: 0.4,
+                            fill: true,
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+
+        // Add these functions after the existing chart initialization functions
+
+        function initializeVendorCharts() {
+            // Vendor Payables Chart
+            const payablesCtx = document.getElementById('vendorPayablesChart')?.getContext('2d');
+            if (payablesCtx) {
+                new Chart(payablesCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Tech Supplies Inc', 'Office Solutions Ltd', 'Global Logistics', 'IT Services Co'],
+                        datasets: [{
+                            label: 'Outstanding Balance',
+                            data: [10000, 10000, 8500, 5000],
+                            backgroundColor: '#3B82F6'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: value => '$' + value.toLocaleString()
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Aging Distribution Chart
+            const agingCtx = document.getElementById('agingDistributionChart')?.getContext('2d');
+            if (agingCtx) {
+                new Chart(agingCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Current', '1-30 Days', '31-60 Days', '60+ Days'],
+                        datasets: [{
+                            data: [65450, 32500, 18000, 9500],
+                            backgroundColor: ['#10B981', '#3B82F6', '#F59E0B', '#EF4444']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        let value = context.parsed || 0;
+                                        return `${label}: $${value.toLocaleString()}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function initializeExpenseCharts() {
+            // Expense Distribution Chart
+            const distributionCtx = document.getElementById('expenseDistributionChart')?.getContext('2d');
+            if (distributionCtx) {
+                new Chart(distributionCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Rent & Utilities', 'Salaries', 'Marketing', 'Inventory', 'Other'],
+                        datasets: [{
+                            data: [3500, 15000, 5000, 45000, 1500],
+                            backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#8B5CF6', '#EF4444']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right'
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Monthly Expense Trend
+            const trendCtx = document.getElementById('expenseTrendChart')?.getContext('2d');
+            if (trendCtx) {
+                new Chart(trendCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Total Expenses',
+                            data: [28000, 32000, 30000, 35000, 31000, 32450],
+                            borderColor: '#EF4444',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: value => '$' + value.toLocaleString()
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function initializeInvoiceCharts() {
+            // Invoice Status Distribution Chart
+            const statusCtx = document.getElementById('invoiceStatusChart')?.getContext('2d');
+            if (statusCtx) {
+                new Chart(statusCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Paid', 'Pending', 'Overdue'],
+                        datasets: [{
+                            data: [198400, 31650, 15800],
+                            backgroundColor: ['#10B981', '#F59E0B', '#EF4444']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        let value = context.parsed || 0;
+                                        return `${label}: $${value.toLocaleString()}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Payment Methods Chart
+            const methodsCtx = document.getElementById('paymentMethodsChart')?.getContext('2d');
+            if (methodsCtx) {
+                new Chart(methodsCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Bank Transfer', 'Credit Card', 'Cash', 'Other'],
+                        datasets: [{
+                            data: [45, 30, 15, 10],
+                            backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#8B5CF6']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right'
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function initializeFinancialCharts() {
+            // Revenue vs Expenses Chart
+            const revenueExpenseCtx = document.getElementById('revenueExpenseChart')?.getContext('2d');
+            if (revenueExpenseCtx) {
+                new Chart(revenueExpenseCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Revenue',
+                            data: [65000, 72000, 78000, 82000, 85000, 89000],
+                            backgroundColor: '#10B981'
+                        }, {
+                            label: 'Expenses',
+                            data: [45000, 48000, 51000, 53000, 54000, 56000],
+                            backgroundColor: '#EF4444'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: value => '$' + value.toLocaleString()
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Cash Flow Chart
+            const cashFlowCtx = document.getElementById('cashFlowChart')?.getContext('2d');
+            if (cashFlowCtx) {
+                new Chart(cashFlowCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Net Cash Flow',
+                            data: [20000, 24000, 27000, 29000, 31000, 33000],
+                            borderColor: '#3B82F6',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                ticks: {
+                                    callback: value => '$' + value.toLocaleString()
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function initializeProfitLossCharts() {
+            // Revenue Breakdown Chart
+            const revenueCtx = document.getElementById('revenueBreakdownChart')?.getContext('2d');
+            if (revenueCtx) {
+                new Chart(revenueCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Product Sales', 'Services', 'Subscriptions', 'Other'],
+                        datasets: [{
+                            data: [125000, 45000, 28000, 12000],
+                            backgroundColor: ['#10B981', '#3B82F6', '#F59E0B', '#8B5CF6']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        let value = context.parsed || 0;
+                                        return `${label}: $${value.toLocaleString()}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Monthly Profit Trend
+            const profitCtx = document.getElementById('profitTrendChart')?.getContext('2d');
+            if (profitCtx) {
+                new Chart(profitCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Gross Profit',
+                            data: [45000, 48000, 52000, 55000, 58000, 60000],
+                            borderColor: '#10B981',
+                            tension: 0.4
+                        }, {
+                            label: 'Net Profit',
+                            data: [25000, 27000, 29000, 31000, 33000, 35000],
+                            borderColor: '#3B82F6',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: value => '$' + value.toLocaleString()
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function initializeBalanceSheetCharts() {
+            // Assets Distribution Chart
+            const assetsCtx = document.getElementById('assetsDistributionChart')?.getContext('2d');
+            if (assetsCtx) {
+                new Chart(assetsCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Current Assets', 'Fixed Assets', 'Other Assets'],
+                        datasets: [{
+                            data: [377750, 108000, 0],
+                            backgroundColor: ['#3B82F6', '#10B981', '#F59E0B']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        let value = context.parsed || 0;
+                                        return `${label}: $${value.toLocaleString()}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Liabilities & Equity Chart
+            const liabilitiesCtx = document.getElementById('liabilitiesEquityChart')?.getContext('2d');
+            if (liabilitiesCtx) {
+                new Chart(liabilitiesCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Current Liabilities', 'Long-term Liabilities', 'Equity'],
+                        datasets: [{
+                            data: [185300, 0, 300450],
+                            backgroundColor: ['#EF4444', '#F59E0B', '#10B981']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        let value = context.parsed || 0;
+                                        return `${label}: $${value.toLocaleString()}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function initializeMainDashboardCharts() {
+            // Sales Trend Chart
+            const salesTrendCtx = document.getElementById('salesTrendChart')?.getContext('2d');
+            if (salesTrendCtx) {
+                new Chart(salesTrendCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Sales',
+                            data: [65000, 72000, 78000, 82000, 85000, 89000],
+                            borderColor: '#3B82F6',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: value => '$' + value.toLocaleString()
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Revenue Distribution Chart
+            const revenueDistCtx = document.getElementById('revenueDistChart')?.getContext('2d');
+            if (revenueDistCtx) {
+                new Chart(revenueDistCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Products', 'Services', 'Other'],
+                        datasets: [{
+                            data: [65, 25, 10],
+                            backgroundColor: ['#10B981', '#3B82F6', '#F59E0B']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right'
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Recent Orders Chart
+            const ordersCtx = document.getElementById('recentOrdersChart')?.getContext('2d');
+            if (ordersCtx) {
+                new Chart(ordersCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        datasets: [{
+                            label: 'Orders',
+                            data: [25, 32, 28, 35, 40, 38, 32],
+                            backgroundColor: '#3B82F6'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Stock Status Chart
+            const stockCtx = document.getElementById('stockStatusChart')?.getContext('2d');
+            if (stockCtx) {
+                new Chart(stockCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Category A', 'Category B', 'Category C', 'Category D'],
+                        datasets: [{
+                            label: 'Stock Level',
+                            data: [85, 65, 45, 75],
+                            backgroundColor: '#F59E0B'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: {
+                                    callback: value => value + '%'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Load dashboard by default
+        loadContent('dashboard');
+
+        // Update the event listener for menu items
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const submenuId = this.getAttribute('data-submenu');
+                const submenu = document.getElementById(submenuId);
+                
+                if (!submenu) {
+                    // If no submenu, just load the content
+                    const page = submenuId;
+                    loadContent(page);
+                    return;
+                }
+
+                // Close other submenus
+                document.querySelectorAll('.submenu').forEach(menu => {
+                    if (menu !== submenu) {
+                        menu.classList.remove('active');
+                        const parentItem = document.querySelector(`[data-submenu="${menu.id}"]`);
+                        if (parentItem) {
+                            parentItem.classList.remove('active');
+                            const icon = parentItem.querySelector('.fa-chevron-right');
+                            if (icon) icon.style.transform = 'rotate(0deg)';
+                        }
+                    }
+                });
+
+                // Toggle current submenu
+                this.classList.toggle('active');
+                submenu.classList.toggle('active');
+                const icon = this.querySelector('.fa-chevron-right');
+                if (icon) {
+                    icon.style.transform = submenu.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
+                }
+            });
+        });
+
+        // Update the event listener for submenu items
+        document.querySelectorAll('.submenu a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const page = this.getAttribute('href').replace('#', '');
+                
+                // Remove active class from all submenu items
+                document.querySelectorAll('.submenu a').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Add active class to clicked item
+                this.classList.add('active');
+                
+                // Keep parent menu open
+                const parentSubmenu = this.closest('.submenu');
+                if (parentSubmenu) {
+                    parentSubmenu.classList.add('active');
+                    const parentMenuItem = document.querySelector(`[data-submenu="${parentSubmenu.id}"]`);
+                    if (parentMenuItem) {
+                        parentMenuItem.classList.add('active');
+                        const icon = parentMenuItem.querySelector('.fa-chevron-right');
+                        if (icon) icon.style.transform = 'rotate(90deg)';
+                    }
+                }
+                
+                if (page) loadContent(page);
+            });
+        });
+    </script>
+</body>
+</html> 

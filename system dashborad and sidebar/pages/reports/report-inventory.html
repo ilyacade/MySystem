@@ -1,0 +1,113 @@
+<div class="report-container">
+    <div class="page-header">
+        <h1>Inventory Report</h1>
+        <div class="header-actions">
+            <button class="btn-success">
+                <i class="fas fa-file-export"></i> Export
+            </button>
+            <button class="btn-primary">
+                <i class="fas fa-print"></i> Print
+            </button>
+        </div>
+    </div>
+
+    <div class="report-filters">
+        <div class="filter-group">
+            <label>Category:</label>
+            <select id="categoryFilter">
+                <option value="all">All Categories</option>
+                <option value="electronics">Electronics</option>
+                <option value="clothing">Clothing</option>
+                <option value="food">Food & Beverage</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Stock Level:</label>
+            <select id="stockFilter">
+                <option value="all">All Levels</option>
+                <option value="low">Low Stock</option>
+                <option value="out">Out of Stock</option>
+                <option value="excess">Excess Stock</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Inventory Overview -->
+    <div class="report-grid">
+        <div class="report-card">
+            <h3>Total Items</h3>
+            <p class="amount">1,245</p>
+            <span class="trend up">+5.2% vs last month</span>
+        </div>
+        <div class="report-card">
+            <h3>Total Value</h3>
+            <p class="amount">$115,000.00</p>
+            <span class="trend up">+3.8% vs last month</span>
+        </div>
+        <div class="report-card">
+            <h3>Low Stock Items</h3>
+            <p class="amount negative">23</p>
+            <span class="trend">Needs attention</span>
+        </div>
+        <div class="report-card">
+            <h3>Out of Stock</h3>
+            <p class="amount negative">8</p>
+            <span class="trend">Critical</span>
+        </div>
+    </div>
+
+    <!-- Stock Level Chart -->
+    <div class="chart-container">
+        <h3 class="section-title">Stock Levels by Category</h3>
+        <canvas id="stockLevelChart"></canvas>
+    </div>
+
+    <!-- Inventory Details -->
+    <div class="table-container">
+        <h3 class="section-title">Inventory Details</h3>
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>In Stock</th>
+                    <th>Reorder Point</th>
+                    <th>Value</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Laptop Pro X</td>
+                    <td>Electronics</td>
+                    <td>15</td>
+                    <td>10</td>
+                    <td>$15,000.00</td>
+                    <td><span class="badge">Optimal</span></td>
+                </tr>
+                <tr>
+                    <td>Wireless Mouse</td>
+                    <td>Electronics</td>
+                    <td>8</td>
+                    <td>20</td>
+                    <td>$240.00</td>
+                    <td><span class="badge low">Low Stock</span></td>
+                </tr>
+                <tr>
+                    <td>USB-C Cable</td>
+                    <td>Electronics</td>
+                    <td>0</td>
+                    <td>50</td>
+                    <td>$0.00</td>
+                    <td><span class="badge critical">Out of Stock</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Movement Analysis -->
+    <div class="chart-container">
+        <h3 class="section-title">Inventory Movement</h3>
+        <canvas id="inventoryMovementChart"></canvas>
+    </div>
+</div> 

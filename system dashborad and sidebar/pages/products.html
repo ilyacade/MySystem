@@ -1,0 +1,136 @@
+<div class="product-container">
+    <div class="page-header">
+        <h1>Products</h1>
+        <div class="header-actions">
+            <button class="btn-primary" onclick="openAddProductDialog()">
+                <i class="fas fa-plus"></i> Add Product
+            </button>
+            <button class="btn-success">
+                <i class="fas fa-file-import"></i> Import Product
+            </button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Product Type</th>
+                    <th>Category</th>
+                    <th>Brand</th>
+                    <th>Sales Price</th>
+                    <th>Purchase Price</th>
+                    <th>Current Stock</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Example Product</td>
+                    <td>Type A</td>
+                    <td>Category 1</td>
+                    <td>Brand X</td>
+                    <td>$100</td>
+                    <td>$50</td>
+                    <td>200</td>
+                    <td>
+                        <button class="btn-action">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add Product Dialog -->
+    <div class="dialog-overlay" id="addProductDialog">
+        <div class="dialog">
+            <div class="dialog-header">
+                <h2>Add New Product</h2>
+                <button class="close-btn" onclick="closeAddProductDialog()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="dialog-content">
+                <form id="addProductForm" onsubmit="handleAddProduct(event)">
+                    <div class="form-group">
+                        <label for="productName">Product Name</label>
+                        <input type="text" id="productName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productType">Product Type</label>
+                        <select id="productType" required>
+                            <option value="">Select Type</option>
+                            <option value="type_a">Type A</option>
+                            <option value="type_b">Type B</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" required>
+                            <option value="">Select Category</option>
+                            <option value="1">Category 1</option>
+                            <option value="2">Category 2</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="brand">Brand</label>
+                        <select id="brand" required>
+                            <option value="">Select Brand</option>
+                            <option value="1">Brand X</option>
+                            <option value="2">Brand Y</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="salesPrice">Sales Price</label>
+                        <input type="number" id="salesPrice" required min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="purchasePrice">Purchase Price</label>
+                        <input type="number" id="purchasePrice" required min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="currentStock">Initial Stock</label>
+                        <input type="number" id="currentStock" required min="0">
+                    </div>
+                    <div class="dialog-actions">
+                        <button type="button" class="btn-secondary" onclick="closeAddProductDialog()">Cancel</button>
+                        <button type="submit" class="btn-primary">Save Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize dialog functionality
+    const dialog = document.getElementById('addProductDialog');
+    
+    window.openAddProductDialog = function() {
+        dialog.classList.add('active');
+    };
+
+    window.closeAddProductDialog = function() {
+        dialog.classList.remove('active');
+    };
+
+    window.handleAddProduct = function(event) {
+        event.preventDefault();
+        // Handle form submission here
+        const formData = new FormData(event.target);
+        // Add your logic to save the product
+        closeAddProductDialog();
+    };
+
+    // Close dialog when clicking outside
+    dialog.addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeAddProductDialog();
+        }
+    });
+});
+</script> 

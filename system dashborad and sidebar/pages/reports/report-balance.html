@@ -1,0 +1,174 @@
+<div class="report-container">
+    <div class="page-header">
+        <h1>Balance Sheet Report</h1>
+        <div class="header-actions">
+            <button class="btn-success">
+                <i class="fas fa-file-export"></i> Export
+            </button>
+            <button class="btn-primary">
+                <i class="fas fa-print"></i> Print
+            </button>
+        </div>
+    </div>
+
+    <div class="report-filters">
+        <div class="filter-group">
+            <label>As of Date:</label>
+            <input type="date" id="balanceDate" value="2024-03-20">
+        </div>
+    </div>
+
+    <div class="report-grid">
+        <div class="report-card">
+            <h3>Total Assets</h3>
+            <p class="amount">$485,750</p>
+            <span class="trend up">+8.2% vs last month</span>
+        </div>
+        <div class="report-card">
+            <h3>Total Liabilities</h3>
+            <p class="amount negative">$185,300</p>
+            <span class="trend down">-3.5% vs last month</span>
+        </div>
+        <div class="report-card">
+            <h3>Total Equity</h3>
+            <p class="amount">$300,450</p>
+            <span class="trend up">+12.8% vs last month</span>
+        </div>
+    </div>
+
+    <div class="report-section">
+        <div class="balance-sheet-container">
+            <!-- Assets Section -->
+            <div class="bs-category">
+                <h3 class="section-title">Assets</h3>
+                <div class="bs-subcategory">
+                    <h4>Current Assets</h4>
+                    <table class="report-table">
+                        <tbody>
+                            <tr>
+                                <td>Cash & Bank</td>
+                                <td class="amount">$125,000</td>
+                            </tr>
+                            <tr>
+                                <td>Accounts Receivable</td>
+                                <td class="amount">$85,250</td>
+                            </tr>
+                            <tr>
+                                <td>Inventory</td>
+                                <td class="amount">$155,500</td>
+                            </tr>
+                            <tr>
+                                <td>Prepaid Expenses</td>
+                                <td class="amount">$12,000</td>
+                            </tr>
+                            <tr class="subtotal-row">
+                                <td>Total Current Assets</td>
+                                <td class="amount">$377,750</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bs-subcategory">
+                    <h4>Fixed Assets</h4>
+                    <table class="report-table">
+                        <tbody>
+                            <tr>
+                                <td>Equipment</td>
+                                <td class="amount">$85,000</td>
+                            </tr>
+                            <tr>
+                                <td>Furniture & Fixtures</td>
+                                <td class="amount">$23,000</td>
+                            </tr>
+                            <tr class="subtotal-row">
+                                <td>Total Fixed Assets</td>
+                                <td class="amount">$108,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="total-section">
+                    <table class="report-table">
+                        <tbody>
+                            <tr class="total-row">
+                                <td><strong>Total Assets</strong></td>
+                                <td class="amount"><strong>$485,750</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Liabilities & Equity Section -->
+            <div class="bs-category">
+                <h3 class="section-title">Liabilities & Equity</h3>
+                <div class="bs-subcategory">
+                    <h4>Current Liabilities</h4>
+                    <table class="report-table">
+                        <tbody>
+                            <tr>
+                                <td>Accounts Payable</td>
+                                <td class="amount">$75,300</td>
+                            </tr>
+                            <tr>
+                                <td>Short-term Loans</td>
+                                <td class="amount">$50,000</td>
+                            </tr>
+                            <tr>
+                                <td>Accrued Expenses</td>
+                                <td class="amount">$35,000</td>
+                            </tr>
+                            <tr>
+                                <td>Taxes Payable</td>
+                                <td class="amount">$25,000</td>
+                            </tr>
+                            <tr class="subtotal-row">
+                                <td>Total Current Liabilities</td>
+                                <td class="amount">$185,300</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bs-subcategory">
+                    <h4>Equity</h4>
+                    <table class="report-table">
+                        <tbody>
+                            <tr>
+                                <td>Common Stock</td>
+                                <td class="amount">$200,000</td>
+                            </tr>
+                            <tr>
+                                <td>Retained Earnings</td>
+                                <td class="amount">$100,450</td>
+                            </tr>
+                            <tr class="subtotal-row">
+                                <td>Total Equity</td>
+                                <td class="amount">$300,450</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="total-section">
+                    <table class="report-table">
+                        <tbody>
+                            <tr class="total-row">
+                                <td><strong>Total Liabilities & Equity</strong></td>
+                                <td class="amount"><strong>$485,750</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <h3 class="section-title">Assets Distribution</h3>
+        <canvas id="assetsDistributionChart"></canvas>
+    </div>
+</div>
+<script src="reports/js/report-balance.js"></script> 

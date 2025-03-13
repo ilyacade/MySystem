@@ -1,0 +1,132 @@
+<div class="report-container">
+    <div class="page-header">
+        <h1>Profit & Loss Report</h1>
+        <div class="header-actions">
+            <button class="btn-success">
+                <i class="fas fa-file-export"></i> Export
+            </button>
+            <button class="btn-primary">
+                <i class="fas fa-print"></i> Print
+            </button>
+        </div>
+    </div>
+
+    <div class="report-filters">
+        <div class="filter-group">
+            <label>Period:</label>
+            <select id="periodFilter">
+                <option value="month">This Month</option>
+                <option value="quarter">This Quarter</option>
+                <option value="year">This Year</option>
+                <option value="custom">Custom Range</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="report-grid">
+        <div class="report-card">
+            <h3>Gross Revenue</h3>
+            <p class="amount positive">$158,450</p>
+            <span class="trend up">+12.5% vs last period</span>
+        </div>
+        <div class="report-card">
+            <h3>Total Expenses</h3>
+            <p class="amount negative">$98,230</p>
+            <span class="trend down">-5.2% vs last period</span>
+        </div>
+        <div class="report-card">
+            <h3>Net Profit</h3>
+            <p class="amount positive">$60,220</p>
+            <span class="trend up">+15.8% vs last period</span>
+        </div>
+        <div class="report-card">
+            <h3>Profit Margin</h3>
+            <p class="amount">38%</p>
+            <span class="trend up">+2.3% vs last period</span>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <h3 class="section-title">Revenue vs Expenses Trend</h3>
+        <canvas id="profitLossTrendChart"></canvas>
+    </div>
+
+    <div class="report-section">
+        <h3 class="section-title">Detailed Statement</h3>
+        
+        <!-- Revenue Section -->
+        <div class="pl-category">
+            <h4>Revenue</h4>
+            <table class="report-table">
+                <tbody>
+                    <tr>
+                        <td>Sales Revenue</td>
+                        <td class="amount positive">$145,000</td>
+                    </tr>
+                    <tr>
+                        <td>Service Revenue</td>
+                        <td class="amount positive">$12,450</td>
+                    </tr>
+                    <tr>
+                        <td>Other Income</td>
+                        <td class="amount positive">$1,000</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td><strong>Total Revenue</strong></td>
+                        <td class="amount positive"><strong>$158,450</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Expenses Section -->
+        <div class="pl-category">
+            <h4>Expenses</h4>
+            <table class="report-table">
+                <tbody>
+                    <tr>
+                        <td>Cost of Goods Sold</td>
+                        <td class="amount negative">$45,000</td>
+                    </tr>
+                    <tr>
+                        <td>Operating Expenses</td>
+                        <td class="amount negative">$28,230</td>
+                    </tr>
+                    <tr>
+                        <td>Salaries & Wages</td>
+                        <td class="amount negative">$15,000</td>
+                    </tr>
+                    <tr>
+                        <td>Marketing & Advertising</td>
+                        <td class="amount negative">$5,000</td>
+                    </tr>
+                    <tr>
+                        <td>Utilities & Rent</td>
+                        <td class="amount negative">$3,500</td>
+                    </tr>
+                    <tr>
+                        <td>Other Expenses</td>
+                        <td class="amount negative">$1,500</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td><strong>Total Expenses</strong></td>
+                        <td class="amount negative"><strong>$98,230</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Net Profit Section -->
+        <div class="pl-category">
+            <table class="report-table">
+                <tbody>
+                    <tr class="grand-total">
+                        <td><strong>Net Profit</strong></td>
+                        <td class="amount positive"><strong>$60,220</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="reports/js/report-profit-loss.js"></script> 

@@ -1,0 +1,341 @@
+/* Report Layout */
+.report-container {
+    padding: 1.5rem;
+    background-color: var(--gray);
+    min-height: 100vh;
+}
+
+.report-filters {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.report-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.report-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.report-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+}
+
+.report-tab {
+    position: relative;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    color: #64748b;
+    transition: all 0.3s ease;
+}
+
+.report-tab:hover {
+    color: var(--primary-color);
+}
+
+.report-tab.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.report-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+/* Report Charts */
+.chart-container {
+    height: 300px;
+    margin-bottom: 1.5rem;
+}
+
+/* Report Tables */
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+.report-table th,
+.report-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+}
+
+.report-table th {
+    background: #f8fafc;
+    font-weight: 600;
+}
+
+/* Amount styling */
+.amount {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+}
+
+.amount.positive {
+    color: #10B981;
+}
+
+.amount.negative {
+    color: #EF4444;
+}
+
+/* Trend indicators */
+.trend {
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.trend.up {
+    color: #10B981;
+}
+
+.trend.down {
+    color: #EF4444;
+}
+
+/* Table categories */
+.category-header td {
+    background: #f8fafc;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+/* Tab content visibility */
+.tab-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Positive/Negative values */
+.positive {
+    color: #10B981;
+}
+
+.negative {
+    color: #EF4444;
+}
+
+/* Additional styles for financial reports */
+.report-card h3 {
+    color: #64748b;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.report-card p:not(.amount) {
+    color: #475569;
+    margin-bottom: 0.5rem;
+}
+
+/* Table footer */
+.report-table tfoot {
+    border-top: 2px solid #e2e8f0;
+}
+
+.report-table tfoot td {
+    color: #1e293b;
+}
+
+/* Category headers in tables */
+.category-header td {
+    background: #f1f5f9;
+    font-weight: 600;
+    color: #475569;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+}
+
+/* Indicator bars */
+.indicator-bar {
+    width: 100%;
+    height: 4px;
+    background-color: #e5e7eb;
+    border-radius: 2px;
+    margin-top: 8px;
+    position: relative;
+}
+
+.indicator-bar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: var(--percentage);
+    background-color: #3B82F6;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+/* Additional badge styles */
+.badge.pending {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.badge.in-progress {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.badge.critical {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.badge.low {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+/* Section titles */
+.section-title {
+    font-size: 1.125rem;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* Enhanced Badge Styles */
+.badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 500;
+    background-color: #10B981;
+    color: white;
+}
+
+.badge.warning {
+    background-color: #F59E0B;
+}
+
+.badge.critical {
+    background-color: #EF4444;
+}
+
+/* Balance Sheet Specific Styles */
+.balance-sheet-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.bs-category {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.bs-subcategory {
+    margin-bottom: 1.5rem;
+}
+
+.bs-subcategory h4 {
+    color: #4B5563;
+    margin-bottom: 1rem;
+    font-size: 1.1em;
+}
+
+.subtotal-row {
+    background-color: #F3F4F6;
+    font-weight: 500;
+}
+
+.total-section {
+    margin-top: 2rem;
+    border-top: 2px solid #E5E7EB;
+    padding-top: 1rem;
+}
+
+/* Enhanced Trend Indicators */
+.trend.up::before {
+    content: '↑';
+    color: #10B981;
+    margin-right: 4px;
+}
+
+.trend.down::before {
+    content: '↓';
+    color: #EF4444;
+    margin-right: 4px;
+}
+
+.trend.critical {
+    color: #EF4444;
+    font-weight: 500;
+}
+
+/* Report Card Enhancements */
+.report-card .amount {
+    font-size: 1.8em;
+    margin: 0.5rem 0;
+}
+
+.report-card .amount.positive {
+    color: #10B981;
+}
+
+.report-card .amount.negative {
+    color: #EF4444;
+}
+
+/* Table Enhancements */
+.report-table td.amount {
+    font-family: monospace;
+    text-align: right;
+}
+
+.report-table tr.total-row {
+    background-color: #F3F4F6;
+    font-weight: 600;
+}
+
+.report-table tr.grand-total {
+    background-color: #E5E7EB;
+    font-weight: 700;
+} 

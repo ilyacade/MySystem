@@ -1,0 +1,148 @@
+<div class="report-container">
+    <div class="page-header">
+        <h1>Invoice & Payment Report</h1>
+        <div class="header-actions">
+            <button class="btn-success">
+                <i class="fas fa-file-export"></i> Export
+            </button>
+            <button class="btn-primary">
+                <i class="fas fa-print"></i> Print
+            </button>
+        </div>
+    </div>
+
+    <div class="report-filters">
+        <div class="filter-group">
+            <label>Date Range:</label>
+            <select id="dateRange">
+                <option value="month">This Month</option>
+                <option value="quarter">This Quarter</option>
+                <option value="year">This Year</option>
+                <option value="custom">Custom Range</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Status:</label>
+            <select id="statusFilter">
+                <option value="all">All Invoices</option>
+                <option value="paid">Paid</option>
+                <option value="unpaid">Unpaid</option>
+                <option value="overdue">Overdue</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="report-grid">
+        <div class="report-card">
+            <h3>Total Invoices</h3>
+            <p class="amount">$245,850</p>
+            <span class="trend up">+12.5% vs last month</span>
+        </div>
+        <div class="report-card">
+            <h3>Paid Amount</h3>
+            <p class="amount positive">$198,400</p>
+            <span class="trend">80.7% of total</span>
+        </div>
+        <div class="report-card">
+            <h3>Outstanding</h3>
+            <p class="amount negative">$47,450</p>
+            <span class="trend down">19.3% pending</span>
+        </div>
+        <div class="report-card">
+            <h3>Overdue</h3>
+            <p class="amount negative">$15,800</p>
+            <span class="trend critical">Needs attention</span>
+        </div>
+    </div>
+
+    <div class="report-tabs">
+        <div class="report-tab active" data-tab="invoice-summary">Invoice Summary</div>
+        <div class="report-tab" data-tab="payment-analysis">Payment Analysis</div>
+        <div class="report-tab" data-tab="invoice-list">Invoice List</div>
+    </div>
+
+    <!-- Invoice Summary Tab -->
+    <div class="tab-content active" id="invoice-summary">
+        <div class="chart-container">
+            <h3 class="section-title">Invoice Status Distribution</h3>
+            <canvas id="invoiceStatusChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h3 class="section-title">Monthly Invoice Trend</h3>
+            <canvas id="invoiceTrendChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Payment Analysis Tab -->
+    <div class="tab-content" id="payment-analysis">
+        <div class="chart-container">
+            <h3 class="section-title">Payment Methods Distribution</h3>
+            <canvas id="paymentMethodsChart"></canvas>
+        </div>
+
+        <div class="report-grid">
+            <div class="report-card">
+                <h3>Average Payment Time</h3>
+                <p class="amount">15 days</p>
+                <span class="trend">Industry avg: 18 days</span>
+            </div>
+            <div class="report-card">
+                <h3>Early Payments</h3>
+                <p class="amount positive">45%</p>
+                <span class="trend up">+5% vs last month</span>
+            </div>
+            <div class="report-card">
+                <h3>Late Payments</h3>
+                <p class="amount negative">12%</p>
+                <span class="trend down">-2% vs last month</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invoice List Tab -->
+    <div class="tab-content" id="invoice-list">
+        <div class="table-container">
+            <h3 class="section-title">Recent Invoices</h3>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Invoice #</th>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th>Amount</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>INV-2024-001</td>
+                        <td>2024-03-15</td>
+                        <td>Tech Corp Ltd</td>
+                        <td class="amount">$5,800</td>
+                        <td>2024-04-14</td>
+                        <td><span class="badge">Paid</span></td>
+                    </tr>
+                    <tr>
+                        <td>INV-2024-002</td>
+                        <td>2024-03-10</td>
+                        <td>Global Systems Inc</td>
+                        <td class="amount negative">$8,500</td>
+                        <td>2024-04-09</td>
+                        <td><span class="badge warning">Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>INV-2024-003</td>
+                        <td>2024-02-28</td>
+                        <td>Office Solutions</td>
+                        <td class="amount negative">$3,200</td>
+                        <td>2024-03-14</td>
+                        <td><span class="badge critical">Overdue</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="reports/js/report-invoice.js"></script> 

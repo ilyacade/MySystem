@@ -1,0 +1,130 @@
+<div class="product-container">
+    <div class="page-header">
+        <h1>Sales Returns</h1>
+        <div class="header-actions">
+            <button class="btn-primary" onclick="openAddReturnDialog()">
+                <i class="fas fa-plus"></i> New Return
+            </button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Return No</th>
+                    <th>Invoice No</th>
+                    <th>Customer</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2024-03-16</td>
+                    <td>RET-001</td>
+                    <td>INV-001</td>
+                    <td>John Doe</td>
+                    <td>$500.00</td>
+                    <td><span class="badge paid">Completed</span></td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn-action view" title="View">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn-action edit" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-action delete" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2024-03-15</td>
+                    <td>RET-002</td>
+                    <td>INV-003</td>
+                    <td>Jane Smith</td>
+                    <td>$750.00</td>
+                    <td><span class="badge partial">Pending</span></td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn-action view" title="View">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn-action edit" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-action delete" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add Return Dialog -->
+    <div class="dialog-overlay" id="addReturnDialog">
+        <div class="dialog">
+            <div class="dialog-header">
+                <h2>New Return</h2>
+                <button class="close-btn" onclick="closeAddReturnDialog()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="dialog-content">
+                <form id="addReturnForm" onsubmit="handleAddReturn(event)">
+                    <div class="form-group">
+                        <label for="invoice">Select Invoice</label>
+                        <select id="invoice" required>
+                            <option value="">Select Invoice</option>
+                            <option value="1">INV-001 (John Doe)</option>
+                            <option value="2">INV-002 (Jane Smith)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="returnDate">Return Date</label>
+                        <input type="date" id="returnDate" required>
+                    </div>
+                    <div class="products-section">
+                        <h3>Return Products</h3>
+                        <div class="product-rows">
+                            <div class="product-row">
+                                <select class="product-select" disabled>
+                                    <option>Product 1</option>
+                                </select>
+                                <input type="number" placeholder="Qty Sold" value="5" readonly>
+                                <input type="number" placeholder="Return Qty" min="1" max="5">
+                                <input type="number" placeholder="Price" value="100" readonly>
+                                <button type="button" class="remove-row"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reason">Return Reason</label>
+                        <select id="reason" required>
+                            <option value="">Select Reason</option>
+                            <option value="damaged">Damaged Product</option>
+                            <option value="wrong">Wrong Product</option>
+                            <option value="not_satisfied">Customer Not Satisfied</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+                        <textarea id="notes" rows="3"></textarea>
+                    </div>
+                    <div class="dialog-actions">
+                        <button type="button" class="btn-secondary" onclick="closeAddReturnDialog()">Cancel</button>
+                        <button type="submit" class="btn-primary">Save Return</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 

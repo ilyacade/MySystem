@@ -1,0 +1,165 @@
+<div class="report-container">
+    <div class="page-header">
+        <h1>Vendor Balance Report</h1>
+        <div class="header-actions">
+            <button class="btn-success">
+                <i class="fas fa-file-export"></i> Export
+            </button>
+            <button class="btn-primary">
+                <i class="fas fa-print"></i> Print
+            </button>
+        </div>
+    </div>
+
+    <div class="report-filters">
+        <div class="filter-group">
+            <label>Date Range:</label>
+            <select id="dateRange">
+                <option value="month">This Month</option>
+                <option value="quarter">This Quarter</option>
+                <option value="year">This Year</option>
+                <option value="custom">Custom Range</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Vendor:</label>
+            <select id="vendorFilter">
+                <option value="all">All Vendors</option>
+                <option value="active">Active Vendors</option>
+                <option value="inactive">Inactive Vendors</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="report-grid">
+        <div class="report-card">
+            <h3>Total Payable</h3>
+            <p class="amount negative">$125,450</p>
+            <span class="trend">Current Balance</span>
+        </div>
+        <div class="report-card">
+            <h3>Overdue Amount</h3>
+            <p class="amount negative">$28,500</p>
+            <span class="trend down">Needs attention</span>
+        </div>
+        <div class="report-card">
+            <h3>Active Vendors</h3>
+            <p class="amount">45</p>
+            <span class="trend up">+3 this month</span>
+        </div>
+    </div>
+
+    <div class="report-tabs">
+        <div class="report-tab active" data-tab="payable-summary">Payable Summary</div>
+        <div class="report-tab" data-tab="aging-analysis">Aging Analysis</div>
+        <div class="report-tab" data-tab="transaction-history">Transaction History</div>
+    </div>
+
+    <!-- Payable Summary Tab -->
+    <div class="tab-content active" id="payable-summary">
+        <div class="chart-container">
+            <h3 class="section-title">Payables by Vendor</h3>
+            <canvas id="vendorPayablesChart"></canvas>
+        </div>
+
+        <div class="table-container">
+            <h3 class="section-title">Vendor Balances</h3>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Vendor Name</th>
+                        <th>Total Purchases</th>
+                        <th>Amount Paid</th>
+                        <th>Balance</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tech Supplies Inc</td>
+                        <td>$45,000</td>
+                        <td>$35,000</td>
+                        <td class="amount negative">$10,000</td>
+                        <td><span class="badge">Current</span></td>
+                    </tr>
+                    <tr>
+                        <td>Office Solutions Ltd</td>
+                        <td>$38,500</td>
+                        <td>$28,500</td>
+                        <td class="amount negative">$10,000</td>
+                        <td><span class="badge critical">Overdue</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Aging Analysis Tab -->
+    <div class="tab-content" id="aging-analysis">
+        <div class="report-grid">
+            <div class="report-card">
+                <h3>Current</h3>
+                <p class="amount">$65,450</p>
+                <div class="indicator-bar" style="--percentage: 52%"></div>
+            </div>
+            <div class="report-card">
+                <h3>1-30 Days</h3>
+                <p class="amount">$32,500</p>
+                <div class="indicator-bar" style="--percentage: 26%"></div>
+            </div>
+            <div class="report-card">
+                <h3>31-60 Days</h3>
+                <p class="amount">$18,000</p>
+                <div class="indicator-bar" style="--percentage: 14%"></div>
+            </div>
+            <div class="report-card">
+                <h3>60+ Days</h3>
+                <p class="amount">$9,500</p>
+                <div class="indicator-bar" style="--percentage: 8%"></div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h3 class="section-title">Aging Distribution</h3>
+            <canvas id="agingDistributionChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Transaction History Tab -->
+    <div class="tab-content" id="transaction-history">
+        <div class="table-container">
+            <h3 class="section-title">Recent Transactions</h3>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Vendor</th>
+                        <th>Transaction Type</th>
+                        <th>Reference</th>
+                        <th>Amount</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-03-20</td>
+                        <td>Tech Supplies Inc</td>
+                        <td>Purchase</td>
+                        <td>PO-2024-001</td>
+                        <td class="amount negative">$5,000</td>
+                        <td class="amount negative">$10,000</td>
+                    </tr>
+                    <tr>
+                        <td>2024-03-18</td>
+                        <td>Tech Supplies Inc</td>
+                        <td>Payment</td>
+                        <td>PAY-2024-015</td>
+                        <td class="amount positive">$3,500</td>
+                        <td class="amount negative">$5,000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="reports/js/report-vendor.js"></script> 
